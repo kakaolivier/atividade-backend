@@ -6,8 +6,10 @@ import com.devshowcase.api.service.ProjectService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/projects")
@@ -28,12 +30,19 @@ public class ProjectController {
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping("/{id}/upvote")
+    public ResponseEntity<ProjectResponse> upvote(@PathVariable Long id) {
+
+        ProjectResponse response = projectService.upvote(id);
+
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping
-    public ResponseEntity<List<ProjectResponse>> findAll() {
-
-        List<ProjectResponse> response =
-                projectService.findAll();
-
+    public ResponseEntity<Page<ProjectResponse>> findAll(
+            @RequestParam(required = false) Long technologyId,
+            @PageableDefault(size = 5) Pageable pageable) {
+        Page<ProjectResponse> response = projectService.findAll(technologyId, pageable);
         return ResponseEntity.ok(response);
     }
 }

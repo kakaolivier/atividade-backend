@@ -10,6 +10,8 @@ public class ProjectResponse {
     private String url;
     private Long profileId;
     private Set<Long> technologyIds;
+    private Double averageRating;
+    private Integer upvotes;
 
     public ProjectResponse(
             Long id,
@@ -17,7 +19,9 @@ public class ProjectResponse {
             String description,
             String url,
             Long profileId,
-            Set<Long> technologyIds) {
+            Set<Long> technologyIds,
+            Double averageRating,
+            Integer upvotes) {
 
         this.id = id;
         this.title = title;
@@ -25,6 +29,8 @@ public class ProjectResponse {
         this.url = url;
         this.profileId = profileId;
         this.technologyIds = technologyIds;
+        this.averageRating = averageRating;
+        this.upvotes = upvotes;
     }
 
     public Long getId() {
@@ -49,5 +55,13 @@ public class ProjectResponse {
 
     public Set<Long> getTechnologyIds() {
         return technologyIds;
+    }
+
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public Integer getUpvotes() {
+        return upvotes;
     }
 }
